@@ -1,6 +1,6 @@
 # attendanceapp
 
-A new Flutter project.
+This is a Flutter application project aims at improvising the conventional way of attendance keeping in university and other educational institutes
 
 ## Getting Started
 
