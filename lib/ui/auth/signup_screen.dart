@@ -1,12 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:attendanceapp/utils/utils.dart';
 import 'package:attendanceapp/widgets/round_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
@@ -15,46 +16,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool loading = false;
   bool _isHiddenPassword = true;
   final _formKey = GlobalKey<FormState>();
-  final emailcontroller = TextEditingController();
-  final passwordcontroller = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
-  FirebaseAuth _auth = FirebaseAuth
+  final FirebaseAuth _auth = FirebaseAuth
       .instance; // _auth is the object,we are initializing here and getting instance of of firebase
 // _auth gives the exposure of api's from the package we have initialized
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    emailcontroller.dispose();
-    passwordcontroller.dispose();
+    emailController.dispose();
+    passwordController.dispose();
   }
 
- void Signup(){
-   setState(() {
-                    loading = true;
-                  });
-                  _auth.createUserWithEmailAndPassword(
-                          email: emailcontroller.text.toString(),
-                          password: passwordcontroller.text.toString()).then((value) {
-                        if (_formKey.currentState!.validate()) {
-                          setState(() {
-                          loading = false;
-                       });
-                    }
-                  }).onError((error, stackTrace) {
-                    Utils().toastMessage(error.toString()); // Utils class
-                    if (_formKey.currentState!.validate()) {
-                  setState(() {
-                    loading = false;
-                  });}
-                  });
- }
+  void Signup() {
+    setState(() {
+      loading = true;
+    });
+    _auth
+        .createUserWithEmailAndPassword(
+            email: emailController.text.toString(),
+            password: passwordController.text.toString())
+        .then((value) {
+      if (_formKey.currentState!.validate()) {
+        setState(() {
+          loading = false;
+        });
+      }
+    }).onError((error, stackTrace) {
+      Utils().toastMessage(error.toString()); // Utils class
+      if (_formKey.currentState!.validate()) {
+        setState(() {
+          loading = false;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Sign up'),
+        title: const Text('Sign up'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -68,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   TextFormField(
                       keyboardType: TextInputType.emailAddress,
-                      controller: emailcontroller,
+                      controller: emailController,
                       decoration: const InputDecoration(
                           hintText: 'Email',
                           helperText: 'enter email e.g. john@gmail.com',
@@ -84,12 +89,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   TextFormField(
                       keyboardType: TextInputType.text,
-                      controller: passwordcontroller,
+                      controller: passwordController,
                       obscureText: _isHiddenPassword,
                       decoration: InputDecoration(
                         hintText: 'Password',
                         helperText: 'Password must be at least six characters',
-                        prefixIcon: Icon(Icons.lock_open),
+                        prefixIcon: const Icon(Icons.lock_open),
                         suffixIcon: InkWell(
                           onTap: _togglePasswordView,
                           child: Icon(
@@ -117,25 +122,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
               onTap: () {
                 if (_formKey.currentState!.validate()) {
                   Signup();
-                //   setState(() {
-                //     loading = true;
-                //   });
-                //   _auth.createUserWithEmailAndPassword(
-                //           email: emailcontroller.text.toString(),
-                //           password: passwordcontroller.text.toString()).then((value) {
-                //         if (_formKey.currentState!.validate()) {
-                //           setState(() {
-                //           loading = false;
-                //        });
-                //     }
-                //   }).onError((error, stackTrace) {
-                //     Utils().toastMessage(error.toString()); // Utils class
-                //     if (_formKey.currentState!.validate()) {
-                //   setState(() {
-                //     loading = false;
-                //   });}
-                //   });
-                 }
+                  //   setState(() {
+                  //     loading = true;
+                  //   });
+                  //   _auth.createUserWithEmailAndPassword(
+                  //           email: emailcontroller.text.toString(),
+                  //           password: passwordcontroller.text.toString()).then((value) {
+                  //         if (_formKey.currentState!.validate()) {
+                  //           setState(() {
+                  //           loading = false;
+                  //        });
+                  //     }
+                  //   }).onError((error, stackTrace) {
+                  //     Utils().toastMessage(error.toString()); // Utils class
+                  //     if (_formKey.currentState!.validate()) {
+                  //   setState(() {
+                  //     loading = false;
+                  //   });}
+                  //   });
+                }
               },
             ),
             const SizedBox(
@@ -144,16 +149,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Already have an account"),
+                const Text("Already have an account"),
                 TextButton(
                     onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
+                            builder: (context) => const LoginScreen(),
                           ));
                     },
-                    child: Text("Login")),
+                    child: const Text("Login")),
               ],
             ),
           ],

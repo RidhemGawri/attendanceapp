@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:attendanceapp/firebase_services/splash_services.dart';
+import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget { 
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
@@ -17,9 +17,14 @@ class _SplashScreenState extends State<SplashScreen> {
     splashScreen.isLogin(context);
   }
 
+  @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text('Attendance App',style: TextStyle(fontSize: 30),),
+      body: Center(
+        child: Text(
+          'Attendance App',
+          style: TextStyle(fontSize: 30),
+        ),
       ),
     );
   }
