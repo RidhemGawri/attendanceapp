@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class ClassGroups extends StatefulWidget {
   const ClassGroups({super.key});
 
+  static const routeName = '/class_groups';
+
   @override
   State<ClassGroups> createState() => _ClassGroupsState();
 }

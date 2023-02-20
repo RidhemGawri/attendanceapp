@@ -1,5 +1,5 @@
 import 'package:attendanceapp/ui/auth/signup_screen.dart';
-import 'package:attendanceapp/ui/home/home_screen.dart';
+import 'package:attendanceapp/ui/screens/home_screen.dart';
 import 'package:attendanceapp/widgets/round_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,8 @@ import '../../utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  static const routeName = '/login_screen';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -42,10 +44,11 @@ class _LoginScreenState extends State<LoginScreen> {
             password: passwordController.text.toString())
         .then((value) {
       Utils().toastMessage(value.user!.email.toString()); // future function
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const HomeScreen()),
+      // );
+      Navigator.pushNamed(context, HomeScreen.routeName);
       setState(() {
         loading = false;
       });
@@ -144,11 +147,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text("Don't have an account"),
                   TextButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignUpScreen(),
-                            ));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => SignUpScreen(),
+                        //     ));
+                        Navigator.pushNamed(context, SignUpScreen.routeName);
                       },
                       child: const Text("Sign up")),
                 ],

@@ -8,6 +8,8 @@ import 'login_screen.dart';
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
+  static const routeName = '/signup_screen';
+
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
@@ -152,11 +154,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const Text("Already have an account"),
                 TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
-                          ));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => const LoginScreen(),
+                      //     ));
+                      Navigator.pushNamed(context, LoginScreen.routeName);
                     },
                     child: const Text("Login")),
               ],
