@@ -1,11 +1,13 @@
 import 'package:attendanceapp/ui/auth/login_screen.dart';
-import 'package:attendanceapp/ui/home/class_groups.dart';
+import 'package:attendanceapp/ui/screens/class_groups.dart';
 import 'package:attendanceapp/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  static const routeName = '/home_screen';
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -23,10 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             onPressed: () {
               auth.signOut().then((value) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const LoginScreen()));
+                Navigator.pushNamed(context, LoginScreen.routeName);
               }).onError((error, stackTrace) {
                 Utils().toastMessage(error.toString());
               });
@@ -35,6 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+
+      // body: Center(
+      //     // child: GridView.builder(
+      //     //     gridDelegate: gridDelegate, itemBuilder: itemBuilder),
+      //     ),
       body: Center(
         child: GridView(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -51,12 +59,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Center(child: Text('1-2')),
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: ((context) => const ClassGroups()),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: ((context) => const ClassGroups()),
+                //   ),
+                // );
+                Navigator.pushNamed(context, ClassGroups.routeName);
               },
             ),
             Container(
