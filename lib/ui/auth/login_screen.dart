@@ -1,13 +1,16 @@
+import 'package:attendanceapp/ui/screens/home_screen.dart';
+import 'package:attendanceapp/widgets/round_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:attendanceapp/ui/auth/signup_screen.dart';
-import 'package:attendanceapp/ui/home/home_screen.dart';
-import 'package:attendanceapp/widgets/round_button.dart';
 
 import '../../utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  static const routeName = '/login_screen';
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -16,8 +19,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isHiddenPassword = true;
   bool loading = false;
   final _formKey = GlobalKey<FormState>();
-  final emailcontroller = TextEditingController();
-  final passwordcontroller = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   final _auth = FirebaseAuth.instance; // creating reference for authentication
 
@@ -25,8 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    emailcontroller.dispose();
-    passwordcontroller.dispose();
+    emailController.dispose();
+    passwordController.dispose();
   }
 
   void login() {
@@ -36,14 +39,15 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     _auth
         .signInWithEmailAndPassword(
-            email: emailcontroller.text,
-            password: passwordcontroller.text.toString())
+            email: emailController.text,
+            password: passwordController.text.toString())
         .then((value) {
       Utils().toastMessage(value.user!.email.toString()); // future function
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const HomeScreen()),
+      // );
+      Navigator.pushNamed(context, HomeScreen.routeName);
       setState(() {
         loading = false;
       });
@@ -57,6 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
@@ -67,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,
-          title: Text('Login'),
+          title: const Text('Login'),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -81,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        controller: emailcontroller,
+                        controller: emailController,
                         decoration: const InputDecoration(
                             hintText: 'Email',
                             helperText: 'enter email e.g. john@gmail.com',
@@ -97,11 +102,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextFormField(
                         keyboardType: TextInputType.text,
-                        controller: passwordcontroller,
+                        controller: passwordController,
                         obscureText: _isHiddenPassword,
                         decoration: InputDecoration(
                           hintText: 'Password',
-                          prefixIcon: Icon(Icons.lock_open),
+                          prefixIcon: const Icon(Icons.lock_open),
                           suffixIcon: InkWell(
                             onTap: _togglePasswordView,
                             child: Icon(
@@ -132,27 +137,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't have an account"),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignUpScreen(),
-                            ));
-                      },
-                      child: Text("Sign up")),
-                ],
-              ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     const Text("Don't have an account"),
+              //     TextButton(
+              //         onPressed: () {
+              //           // Navigator.push(
+              //           //     context,
+              //           //     MaterialPageRoute(
+              //           //       builder: (context) => SignUpScreen(),
+              //           //     ));
+              //           Navigator.pushNamed(context, SignUpScreen.routeName);
+              //         },
+              //         child: const Text("Sign up")),
+              //   ],
+              // ),
               // InkWell(
               //   onTap: () {
-                  
+
               //   },
               // ),
               // Container(

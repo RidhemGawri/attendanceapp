@@ -1,8 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ClassGroups extends StatefulWidget {
   const ClassGroups({super.key});
+
+  static const routeName = '/class_groups';
 
   @override
   State<ClassGroups> createState() => _ClassGroupsState();
@@ -16,27 +17,27 @@ class _ClassGroupsState extends State<ClassGroups> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('C-12'),
+          title: const Text('C-12'),
           centerTitle: true,
-          bottom: TabBar(tabs: [
+          bottom: const TabBar(tabs: [
             Tab(text: 'C-1'),
             Tab(text: 'C-2'),
           ]),
         ),
         body: TabBarView(children: [
           CheckboxListTile(
-              title: const Text('12001190 - ABCD'),
-              value: _isChecked,
-              onChanged: (bool? newValue) {
-                setState(() {
-                  _isChecked = newValue;
-                });
-               },
-              //  activeColor: Colors.white,
-              // checkColor: Colors.black,
-              ),
+            title: const Text('12001190 - ABCD'),
+            value: _isChecked,
+            onChanged: (bool? newValue) {
+              setState(() {
+                _isChecked = newValue;
+              });
+            },
+            //  activeColor: Colors.white,
+            // checkColor: Colors.black,
+          ),
           CheckboxListTile(
-             title: const Text('12001141 - XYZ'),
+              title: const Text('12001141 - XYZ'),
               value: _isChecked,
               onChanged: (bool? newValue) {
                 setState(() {
@@ -62,6 +63,11 @@ class _ClassGroupsState extends State<ClassGroups> {
         //     ),
         //     )
         //   ),
+
+        floatingActionButton: const FloatingActionButton(
+          onPressed: null,
+          child: Icon(Icons.save),
+        ),
       ),
     );
   }
