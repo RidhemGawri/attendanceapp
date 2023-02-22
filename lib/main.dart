@@ -1,5 +1,4 @@
 import 'package:attendanceapp/ui/auth/login_screen.dart';
-import 'package:attendanceapp/ui/auth/signup_screen.dart';
 import 'package:attendanceapp/ui/screens/class_groups.dart';
 import 'package:attendanceapp/ui/screens/home_screen.dart';
 import 'package:attendanceapp/ui/screens/splash_screen.dart';
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
       routes: {
         HomeScreen.routeName: (ctx) => const HomeScreen(),
         LoginScreen.routeName: (ctx) => const LoginScreen(),
-        SignUpScreen.routeName: (ctx) => const SignUpScreen(),
+      //  SignUpScreen.routeName: (ctx) => const SignUpScreen(),
         ClassGroups.routeName: (ctx) => const ClassGroups(),
       },
     );

@@ -1,4 +1,3 @@
-import 'package:attendanceapp/ui/auth/signup_screen.dart';
 import 'package:attendanceapp/ui/screens/home_screen.dart';
 import 'package:attendanceapp/widgets/round_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -138,25 +137,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Don't have an account"),
-                  TextButton(
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => SignUpScreen(),
-                        //     ));
-                        Navigator.pushNamed(context, SignUpScreen.routeName);
-                      },
-                      child: const Text("Sign up")),
-                ],
-              ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     const Text("Don't have an account"),
+              //     TextButton(
+              //         onPressed: () {
+              //           // Navigator.push(
+              //           //     context,
+              //           //     MaterialPageRoute(
+              //           //       builder: (context) => SignUpScreen(),
+              //           //     ));
+              //           Navigator.pushNamed(context, SignUpScreen.routeName);
+              //         },
+              //         child: const Text("Sign up")),
+              //   ],
+              // ),
               // InkWell(
               //   onTap: () {
 
