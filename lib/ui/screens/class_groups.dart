@@ -1,4 +1,6 @@
+import 'package:attendanceapp/providers/class_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ClassGroups extends StatefulWidget {
   const ClassGroups({super.key});
@@ -13,11 +15,17 @@ class _ClassGroupsState extends State<ClassGroups> {
   bool? _isChecked = false;
   @override
   Widget build(BuildContext context) {
+    //getting the name of class we are in
+    final className = ModalRoute.of(context)?.settings.arguments as String;
+
+    final loadedClass = Provider.of<ClassProvider>(context).findById(
+        className); //this findById method is defined in class_provider.dart file
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('C-12'),
+          title: Text(loadedClass.name),
           centerTitle: true,
           bottom: const TabBar(tabs: [
             Tab(text: 'C-1'),

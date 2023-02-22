@@ -1,9 +1,11 @@
+import 'package:attendanceapp/providers/class_provider.dart';
 import 'package:attendanceapp/ui/auth/login_screen.dart';
 import 'package:attendanceapp/ui/screens/class_groups.dart';
 import 'package:attendanceapp/ui/screens/home_screen.dart';
 import 'package:attendanceapp/ui/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding
@@ -22,19 +24,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      // title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
+    return ChangeNotifierProvider(
+      create: (ctx) => ClassProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        // title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+        ),
+        home: const SplashScreen(),
+        routes: {
+          HomeScreen.routeName: (ctx) => HomeScreen(),
+          LoginScreen.routeName: (ctx) => const LoginScreen(),
+          //  SignUpScreen.routeName: (ctx) => const SignUpScreen(),
+          ClassGroups.routeName: (ctx) => const ClassGroups(),
+        },
       ),
-      home: const SplashScreen(),
-      routes: {
-        HomeScreen.routeName: (ctx) => const HomeScreen(),
-        LoginScreen.routeName: (ctx) => const LoginScreen(),
-      //  SignUpScreen.routeName: (ctx) => const SignUpScreen(),
-        ClassGroups.routeName: (ctx) => const ClassGroups(),
-      },
     );
   }
 }
