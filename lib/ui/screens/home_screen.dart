@@ -1,23 +1,25 @@
+import 'package:attendanceapp/providers/class_provider.dart';
 import 'package:attendanceapp/ui/auth/login_screen.dart';
 import 'package:attendanceapp/ui/screens/class_groups.dart';
 import 'package:attendanceapp/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
 
   static const routeName = '/home_screen';
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   final auth = FirebaseAuth.instance;
+
   final colortheme = Colors.teal;
+
   @override
   Widget build(BuildContext context) {
+    //using the provider package
+    //Provider.of<ClassProvider>(context).getClassesList();
+    final classList = Provider.of<ClassProvider>(context).classes;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -70,30 +72,35 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
-          child: GridView.builder(
-              itemCount: 4,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 0.6,
-              ),
-              itemBuilder: ((context, index) => InkWell(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: Colors.teal),
-                      child: Center(
-                        child: Text(
-                          "$index",
-                          style: TextStyle(fontSize: 20),
+          child: classList.isEmpty
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : GridView.builder(
+                  itemCount: classList.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 2.0,
+                  ),
+                  itemBuilder: ((context, i) => InkWell(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: Colors.teal),
+                          child: Center(
+                            child: Text(
+                              classList[i].name,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(context, ClassGroups.routeName);
-                    },
-                  ))),
+                        onTap: () {
+                          Navigator.pushNamed(context, ClassGroups.routeName,
+                              arguments: classList[i].name);
+                        },
+                      ))),
         ),
       ),
 
