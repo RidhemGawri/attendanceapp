@@ -27,9 +27,9 @@ class ClassProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List<Class> get classes {
+  List<Class> get classes {     // getter function
     getClassesList(); //calling the classes function
-    return [..._classes];
+    return [..._classes];  // ... is used because the copy of that data is stored in classes variable
   }
 
   Class findById(String className) {

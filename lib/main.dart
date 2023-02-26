@@ -2,6 +2,7 @@ import 'package:attendanceapp/providers/class_provider.dart';
 import 'package:attendanceapp/ui/auth/login_screen.dart';
 import 'package:attendanceapp/ui/screens/class_groups.dart';
 import 'package:attendanceapp/ui/screens/home_screen.dart';
+import 'package:attendanceapp/ui/screens/record.dart';
 import 'package:attendanceapp/ui/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +37,8 @@ class MyApp extends StatelessWidget {
         routes: {
           HomeScreen.routeName: (ctx) => HomeScreen(),
           LoginScreen.routeName: (ctx) => const LoginScreen(),
-          //  SignUpScreen.routeName: (ctx) => const SignUpScreen(),
           ClassGroups.routeName: (ctx) => const ClassGroups(),
+          Records.routeName: (ctx) => const Records(),
         },
       ),
     );

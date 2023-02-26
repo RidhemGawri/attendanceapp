@@ -1,6 +1,7 @@
 import 'package:attendanceapp/providers/class_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:attendanceapp/ui/screens/class_groups.dart';
 
 class ClassGroups extends StatefulWidget {
   const ClassGroups({super.key});
