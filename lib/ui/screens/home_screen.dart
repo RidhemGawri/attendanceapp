@@ -1,6 +1,7 @@
 import 'package:attendanceapp/providers/class_provider.dart';
 import 'package:attendanceapp/ui/auth/login_screen.dart';
 import 'package:attendanceapp/ui/screens/class_groups.dart';
+import 'package:attendanceapp/ui/screens/record.dart';
 import 'package:attendanceapp/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,7 @@ class HomeScreen extends StatelessWidget {
 
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
+          padding: const EdgeInsets.only(top: 5.0, left: 20.0, right: 20.0),
           child: classList.isEmpty
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -97,8 +98,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, ClassGroups.routeName,
-                              arguments: classList[i].name);
+                          Navigator.pushNamed(context, Records.routeName,arguments: classList[i]);
                         },
                       ))),
         ),
