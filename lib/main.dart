@@ -4,6 +4,7 @@ import 'package:attendanceapp/ui/screens/class_groups.dart';
 import 'package:attendanceapp/ui/screens/home_screen.dart';
 import 'package:attendanceapp/ui/screens/record.dart';
 import 'package:attendanceapp/ui/screens/splash_screen.dart';
+import 'package:attendanceapp/ui/screens/calendar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
           LoginScreen.routeName: (ctx) => const LoginScreen(),
           ClassGroups.routeName: (ctx) => const ClassGroups(),
           Records.routeName: (ctx) => const Records(),
+          Calender.routeName: (ctx) => const Calender(),
         },
       ),
     );

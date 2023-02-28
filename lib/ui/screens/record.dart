@@ -1,3 +1,4 @@
+import 'package:attendanceapp/ui/screens/calendar.dart';
 import 'package:attendanceapp/ui/screens/class_groups.dart';
 import 'package:flutter/material.dart';
 
@@ -15,13 +16,22 @@ class _RecordsState extends State<Records> {
   Widget build(BuildContext context) {
     return Scaffold(
        body: Column(
-         children: [
-          Padding(
-            padding: const EdgeInsets.only(top:50.0,bottom: 20),
-            child: Text('Records',
-              style: const TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold),
+         children:[
+          Row(
+            children: [
+              IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: (){
+                Navigator.pop(context);
+              },
+             ),
+             SizedBox(width: 2),
+              Text('Records',
+              style: const TextStyle(fontSize: 21.0,fontWeight: FontWeight.bold),
               ),
-          ),
+             ],
+            ),
+            SizedBox(height: 20),
            Center(
               child: Container(
                 alignment: Alignment.center,
@@ -39,7 +49,7 @@ class _RecordsState extends State<Records> {
                               ),
                             ),
            ),
-           SizedBox(height: 60),
+           SizedBox(height: 50),
            Center(
               child: InkWell(
                 child: Container(
@@ -58,7 +68,7 @@ class _RecordsState extends State<Records> {
                                 ),
                               ),
                  onTap: () {
-                          Navigator.pushNamed(context, ClassGroups.routeName);
+                          Navigator.pushNamed(context, Calender.routeName);
                         },
               ),
            ),
