@@ -13,6 +13,15 @@ class ClassProvider with ChangeNotifier {
     // Class(name: "3CE78", subject: "ML", instructor: "Navdeep"),
   ];
 
+  final List<String> _recordList = [
+    // Class(name: "3CE12", subject: "ML", instructor: "Navdeep"),
+    // Class(name: "3CE34", subject: "ML", instructor: "Navdeep"),
+    // Class(name: "3CE56", subject: "ML", instructor: "Navdeep"),
+    // Class(name: "3CE78", subject: "ML", instructor: "Navdeep"),
+  ];
+
+
+
   //method to get the list of classes from firebase
   Future getClassesList() async {
     await classList.get().then((querySnapshot) {
@@ -32,7 +41,23 @@ class ClassProvider with ChangeNotifier {
     return [..._classes];  // ... is used because the copy of that data is stored in classes variable
   }
 
+  List<String> get recordList {     // getter function
+    //getClassesList(); //calling the classes function
+    return [..._recordList];  // ... is used because the copy of that data is stored in classes variable
+  }
+
   Class findById(String className) {
     return _classes.firstWhere((element) => element.name == className);
+  }
+  //below is the code to fetch the previous records from firebase
+
+   Future getRecordList(String className)  async {
+    final CollectionReference currentRecordList= classList.doc(className).collection('record');
+    await  currentRecordList.get().then((querySnapshot) {
+      for(var element in querySnapshot.docs){
+        _recordList.add(element.id);
+      }
+    });
+    notifyListeners();
   }
 }

@@ -2,6 +2,7 @@ import 'package:attendanceapp/providers/class_provider.dart';
 import 'package:attendanceapp/ui/auth/login_screen.dart';
 import 'package:attendanceapp/ui/screens/class_groups.dart';
 import 'package:attendanceapp/ui/screens/home_screen.dart';
+import 'package:attendanceapp/ui/screens/previous_record_screen.dart';
 import 'package:attendanceapp/ui/screens/record.dart';
 import 'package:attendanceapp/ui/screens/splash_screen.dart';
 import 'package:attendanceapp/ui/screens/calendar.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
           ClassGroups.routeName: (ctx) => const ClassGroups(),
           Records.routeName: (ctx) => const Records(),
           Calender.routeName: (ctx) => const Calender(),
+          PreviousRecordScreen.routeName: (ctx) => const PreviousRecordScreen(),
         },
       ),
     );
