@@ -98,7 +98,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, Records.routeName,arguments: classList[i]);
+                          Navigator.pushNamed(context, Records.routeName,arguments: classList[i].name);
                         },
                       ))),
         ),
