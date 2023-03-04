@@ -9,3 +9,12 @@ class Class {
     required this.instructor,
   });
 }
+class Student{
+  final String name;
+  final bool isPresent;
+
+  Student({
+   required this.name,
+   required this.isPresent
+});
+}

@@ -19,6 +19,10 @@ class ClassProvider with ChangeNotifier {
     // Class(name: "3CE56", subject: "ML", instructor: "Navdeep"),
     // Class(name: "3CE78", subject: "ML", instructor: "Navdeep"),
   ];
+  final List<Student> _studentList = [
+    //this list will store the students
+
+  ];
 
 
 
@@ -46,18 +50,39 @@ class ClassProvider with ChangeNotifier {
     return [..._recordList];  // ... is used because the copy of that data is stored in classes variable
   }
 
+  List<Student> get studentList{
+    return [..._studentList];
+  }
+
   Class findById(String className) {
     return _classes.firstWhere((element) => element.name == className);
   }
   //below is the code to fetch the previous records from firebase
 
    Future getRecordList(String className)  async {
-    final CollectionReference currentRecordList= classList.doc(className).collection('record');
-    await  currentRecordList.get().then((querySnapshot) {
-      for(var element in querySnapshot.docs){
-        _recordList.add(element.id);
-      }
-    });
-    notifyListeners();
-  }
+     _recordList.clear();
+     final CollectionReference currentRecordList = classList.doc(className)
+         .collection('record');
+     await currentRecordList.get().then((querySnapshot) {
+       for (var element in querySnapshot.docs) {
+         _recordList.add(element.id);
+       }
+     });
+     notifyListeners();
+   }
+
+
+    //below is the code to fetch all the student roll numbers in a class
+   Future getStudentList(String className, String recordDate) async{
+    _studentList.clear();
+    final  currentRecordDate = classList.doc(className).collection('record').doc(recordDate);//this currentRecordDate stores the id of document we are trying to access
+    final data = await currentRecordDate.get();
+    Map<String, dynamic> values = data.data() as Map<String, bool>;//this map contains all the values
+     values.forEach((key, value) {
+       _studentList.add(Student(name: key, isPresent: values[key]));
+     });
+     notifyListeners();
+
+   }
+
 }
