@@ -48,3 +48,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+//to get the attendance of a certain student we can query all the document where that student is present and hence return the size of that db query

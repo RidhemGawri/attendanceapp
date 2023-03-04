@@ -12,11 +12,17 @@ class PreviousRecordScreen extends StatelessWidget {
     final className = ModalRoute.of(context)?.settings.arguments as String;
     Provider.of<ClassProvider>(context).getRecordList(className);
     final currentRecordList = Provider.of<ClassProvider>(context).recordList;
+
+    // Map<String, String> args = {
+    //   //this is the map we will pass in arguments
+    //   'name': className,
+    //   're'
+    // };
     return Scaffold(
       appBar: AppBar(title: const Text("Current class"),
       ),
       body: ListView.builder(itemCount: currentRecordList.length,itemBuilder: (BuildContext ctx , int index){
-        return ListTile(title: Text(currentRecordList[index]),onTap: (){Navigator.pushNamed(context, ClassGroups.routeName,arguments: className);},);
+        return ListTile(title: Text(currentRecordList[index]),onTap: (){Navigator.pushNamed(context, ClassGroups.routeName,arguments: {'name': className , 'recordDate':currentRecordList[index] });},);
 
 
       }),
