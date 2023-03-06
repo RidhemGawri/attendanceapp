@@ -1,16 +1,44 @@
+import 'package:attendanceapp/models/class.dart';
 import 'package:attendanceapp/providers/class_provider.dart';
 import 'package:attendanceapp/ui/auth/login_screen.dart';
 import 'package:attendanceapp/ui/screens/class_groups.dart';
 import 'package:attendanceapp/ui/screens/record.dart';
 import 'package:attendanceapp/utils/utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
-
   static const routeName = '/home_screen';
+  List<Class> classes = [];
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final CollectionReference classList =
+      FirebaseFirestore.instance.collection("classes");
+
+  @override
+  void initState() {
+    super.initState();
+    getClassesList();
+  }
+
+  Future getClassesList() async {
+    QuerySnapshot snapshot = await classList.get();
+    List<Class> x = snapshot.docs
+        .map((element) => Class(
+            name: element['className'],
+            subject: element['subject'],
+            instructor: element['instructor']))
+        .toList();
+    setState(() {
+      widget.classes = x;
+    });
+  }
 
   final auth = FirebaseAuth.instance;
 
@@ -18,9 +46,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("hi");
     //using the provider package
     //Provider.of<ClassProvider>(context).getClassesList();
-    final classList = Provider.of<ClassProvider>(context).classes;
+    final classList = widget.classes;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -98,7 +127,8 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, Records.routeName,arguments: classList[i].name);
+                          Navigator.pushNamed(context, Records.routeName,
+                              arguments: classList[i].name);
                         },
                       ))),
         ),
